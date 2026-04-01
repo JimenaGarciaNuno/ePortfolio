@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jimena Garcia-Nuno — ECE Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #a8c8e8;
+      --surface: #bcd6ed;
+      --surface2: #cfe2f3;
+      --accent: #000000;
+      --text: #000000;
+      --text-inv: #a8c8e8;
+      --muted: #1e3a52;
+      --border: rgba(0,0,0,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(168,200,232,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid #000;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: #000;
+      letter-spacing: 0.1em;
+    }
+
+    .nav-links { display: flex; gap: 0.75rem; list-style: none; }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      border: 1.5px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      border-color: #000;
+      background: rgba(0,0,0,0.08);
+    }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 7rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .track {
+      position: absolute;
+      border: 5px solid #000;
+      border-radius: 60px;
+      pointer-events: none;
+    }
+    .track-1 { width: 340px; height: 220px; bottom: -60px; left: -80px; border-top-color: transparent; border-left-color: transparent; }
+    .track-2 { width: 260px; height: 180px; top: 60px; right: -60px; border-bottom-color: transparent; border-right-color: transparent; }
+    .track-dot {
+      position: absolute;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 4px solid #000;
+      background: var(--bg);
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 2rem; height: 2px; background: #000; }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 8vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: 0.03em;
+      color: #000;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 span {
+      display: block;
+      -webkit-text-stroke: 2px #000;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-summary {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 500px;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 999px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary { background: #000; color: var(--bg); font-weight: 500; }
+    .btn-primary:hover { background: #1e3a52; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: #000; border: 2px solid #000; }
+    .btn-outline:hover { background: rgba(0,0,0,0.07); }
+
+    .hero-card {
+      background: #000;
+      color: var(--text-inv);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: 'JGN';
+      position: absolute;
+      bottom: -1rem; right: -0.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 7rem;
+      color: rgba(168,200,232,0.06);
+      letter-spacing: 0.05em;
+      pointer-events: none;
+    }
+
+    .hero-photo {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 3px solid var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .hero-card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      color: var(--bg);
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-card-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: rgba(168,200,232,0.5);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-quote {
+      font-style: italic;
+      font-size: 0.88rem;
+      color: rgba(168,200,232,0.7);
+      border-left: 2px solid rgba(168,200,232,0.25);
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+    .stat-item {
+      background: rgba(168,200,232,0.07);
+      border: 1px solid rgba(168,200,232,0.12);
+      border-radius: 8px;
+      padding: 0.85rem;
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: rgba(168,200,232,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value { font-size: 0.88rem; font-weight: 600; color: var(--bg); }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after { content: ''; flex: 1; height: 2px; background: #000; max-width: 50px; }
+
+    h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      letter-spacing: 0.04em;
+      color: #000;
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    h3 { font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 600; color: #000; margin-bottom: 0.35rem; }
+
+    .section-divider { border: none; border-top: 2px solid #000; max-width: 1100px; margin: 0 3rem; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+    .about-image-block { position: sticky; top: 7rem; }
+
+    .about-photo {
+      width: 100%; aspect-ratio: 3/4;
+      background: #000; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .about-photo-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: rgba(168,200,232,0.4);
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    }
+
+    .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      border: 1.5px solid #000;
+      color: #000;
+      letter-spacing: 0.05em;
+    }
+    .tag.filled { background: #000; color: var(--bg); }
+
+    .about-content p { color: var(--muted); font-weight: 300; margin-bottom: 1.2rem; font-size: 0.97rem; }
+    .about-content p strong { color: #000; font-weight: 600; }
+
+    /* ── RESUME ── */
+    .resume-wrap { background: #000; color: var(--text-inv); border-radius: 20px; padding: 3rem; margin-top: 3rem; }
+
+    .resume-section-title {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(168,200,232,0.4); margin-bottom: 1rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid rgba(168,200,232,0.1);
+    }
+
+    .resume-block { margin-bottom: 2.5rem; }
+    .resume-block:last-of-type { margin-bottom: 0; }
+
+    .resume-item {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 1rem; margin-bottom: 1.25rem; padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(168,200,232,0.07);
+    }
+    .resume-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .resume-role { font-weight: 600; font-size: 0.95rem; color: var(--bg); }
+    .resume-org { color: rgba(168,200,232,0.55); font-size: 0.82rem; font-family: 'DM Mono', monospace; margin-top: 0.15rem; }
+    .resume-date { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(168,200,232,0.3); white-space: nowrap; }
+    .resume-desc { color: rgba(168,200,232,0.5); font-size: 0.88rem; margin-top: 0.4rem; font-weight: 300; }
+
+    .resume-bullets { list-style: none; margin-top: 0.5rem; }
+    .resume-bullets li {
+      color: rgba(168,200,232,0.5); font-size: 0.85rem;
+      font-weight: 300; padding-left: 1.2rem;
+      position: relative; margin-bottom: 0.3rem;
+    }
+    .resume-bullets li::before { content: '→'; position: absolute; left: 0; color: rgba(168,200,232,0.3); font-size: 0.75rem; }
+
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+
+    .skill-pill {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      padding: 0.3rem 0.85rem; border-radius: 4px;
+      background: rgba(168,200,232,0.08);
+      border: 1px solid rgba(168,200,232,0.15);
+      color: var(--bg);
+    }
+
+    .resume-download { margin-top: 2rem; display: flex; justify-content: flex-end; }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; margin-top: 3rem; padding-left: 2.5rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #000; }
+
+    .timeline-item { position: relative; margin-bottom: 2.5rem; padding-left: 1.5rem; }
+
+    .timeline-dot {
+      position: absolute; left: -2.5rem; top: 0.4rem;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--bg); border: 3px solid #000;
+    }
+
+    .timeline-date { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+
+    .timeline-content { background: #000; color: var(--text-inv); border-radius: 12px; padding: 1.25rem 1.5rem; }
+    .timeline-content h3 { color: var(--bg); font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.05em; }
+    .timeline-content p { color: rgba(168,200,232,0.55); font-size: 0.88rem; font-weight: 300; margin-top: 0.4rem; }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+
+    .project-card { background: #000; color: var(--text-inv); border-radius: 16px; overflow: hidden; transition: transform 0.2s; }
+    .project-card:hover { transform: translateY(-5px); }
+
+    .project-image {
+      width: 100%; height: 200px;
+      background: var(--surface2);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .project-image img { width: 100%; height: 100%; object-fit: cover; }
+    .project-image-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: rgba(0,0,0,0.3); font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    }
+
+    .project-body { padding: 1.75rem; }
+    .project-type { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: rgba(168,200,232,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .project-body h3 { color: var(--bg); font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+    .project-body p { color: rgba(168,200,232,0.5); font-size: 0.87rem; font-weight: 300; margin-bottom: 1rem; }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .project-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; padding: 0.25rem 0.65rem; border-radius: 4px; border: 1px solid rgba(168,200,232,0.18); color: rgba(168,200,232,0.45); }
+
+    .project-placeholder {
+      border: 2px dashed rgba(0,0,0,0.2); background: transparent; color: var(--muted);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 180px; text-align: center; padding: 2rem; border-radius: 16px;
+    }
+
+    /* ── FOOTER ── */
+    footer { border-top: 2px solid #000; padding: 3rem; text-align: center; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.05em; }
+    .footer-name { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: #000; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    footer a { color: #000; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.3); }
+    footer a:hover { border-bottom-color: #000; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow { animation: fadeUp 0.5s 0.1s ease both; }
+    h1            { animation: fadeUp 0.5s 0.2s ease both; }
+    .hero-summary { animation: fadeUp 0.5s 0.3s ease both; }
+    .hero-cta     { animation: fadeUp 0.5s 0.4s ease both; }
+    .hero-card    { animation: fadeUp 0.6s 0.3s ease both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      #home { padding: 6rem 1.5rem 3rem; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-image-block { position: static; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .section-divider { margin: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Jimena Garcia-Nuno</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#carreergoals"> Career Goals</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="home">
+    <div class="track track-1"></div>
+    <div class="track track-2"></div>
+    <div class="track-dot" style="bottom:80px; left:180px;"></div>
+    <div class="track-dot" style="bottom:-10px; left:320px;"></div>
+    <div class="track-dot" style="top:100px; right:120px;"></div>
+
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-eyebrow">ECE Student · Georgia Tech · Atlanta, GA</div>
+        <h1>Jimena<br><span>Garcia-</span>Nuno</h1>
+        <p class="hero-summary">
+          Electrical Engineering undergraduate combining hardware design, optical imaging research, and embedded systems to build high-impact engineering solutions. Seeking a Summer 2027 internship in imaging, embedded systems, or IoT.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">View My Work →</a>
+          <a href="#resume" class="btn btn-outline">Resume</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-photo">
+           <img src="images\headshot.jpg" alt="Jimena Garcia-Nuno">
+          
+        </div>
+        <div class="hero-card-name">Jimena Garcia-Nuno</div>
+        <div class="hero-card-sub">B.S. Electrical Engineering</div>
+        <div class="hero-quote">
+          "Current undergraduate student at Georgia Tech intrested in embedded system and PCB design."
+        </div>
+        <div class="stat-grid">
+          <div class="stat-item"><div class="stat-label">Major</div><div class="stat-value">Electrical Eng.</div></div>
+          <div class="stat-item"><div class="stat-label">Grad Year</div><div class="stat-value">May 2029</div></div>
+          <div class="stat-item"><div class="stat-label">From</div><div class="stat-value">Atlanta, GA</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">01 — About Me</div>
+    <h2>My Story</h2>
+    <div class="about-grid">
+      <div class="about-image-block">
+        <div class="about-photo">
+          <img src="images\IMG_4567.jpeg" alt="Jimena">
+          //<div class="about-photo-placeholder">
+          //<div style="font-size:3rem;"div>
+          //  <div>Add your photo here</div>
+          //</div>
+        </div>
+        <div class="about-tags">
+          <span class="tag filled">PCB Design</span>
+          <span class="tag filled">Embedded Systems</span>
+          <span class="tag">Georgia Tech</span>
+          <span class="tag">SHPE</span>
+          <span class="tag">Optica</span>
+          <span class="tag">ASHRAE</span>
+          <span class="tag">Bilingual</span>
+          <span class="tag">FRC Mentor</span>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <p>
+          <strong>Who I am:</strong> My name is Jimena Garcia-Nuno and I'm a first-year Electrical Engineering student at Georgia Institute of Technology, currently maintaining a 3.33 GPA. I'm a native Spanish speaker, fluent in English, and learning French. Growing up bilingual and bicultural taught me how to communicate across differences — a skill I carry into every engineering team I join.
+        </p>
+        <p>
+          What drew me to electrical engineering was a deep curiosity about the hardware behind technologies that shape our world — from microscopy systems used in cancer detection to the sensor networks that power smart infrastructure. Georgia Tech is exactly the right place to turn that curiosity into real-world impact.
+        </p>
+        <p>
+          Since arriving at GT, I've contributed to two active research labs. In the <strong>Optical Imaging and Spectroscopy Lab</strong>, I design and fabricate custom PCBs for biomedical imaging systems, develop probe prototypes in SolidWorks, and program microcontrollers using Arduino and MATLAB. At the <strong>Aerospace System Design Laboratory (ASDL)</strong>, I've redesigned PCBs for a HUB and Spoke IoT sensor platform, improving hardware reliability for field deployment.
+        </p>
+        <p>
+          Outside of research, I serve as a <strong>Technical Mentor</strong> for FIRST Robotics Competition Team 6023, guiding high school students through system design, wiring, and hands-on engineering. I'm also an active member of the Society of Hispanic Professional Engineers, ASHRAE, and Optica.
+        </p>
+        <p>
+          <strong>What makes me stand out:</strong> I bring hands-on hardware fluency — soldering, PCB fabrication, continuity testing, and embedded programming — paired with the communication skills needed to thrive in diverse, interdisciplinary teams.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="section-label">02 — Resume</div>
+    <h2>Experience & Skills</h2>
+
+    <div class="resume-wrap">
+
+      <div class="resume-block">
+        <div class="resume-section-title">Education</div>
+        <div class="resume-item">
+          <div>
+            <div class="resume-role">B.S. Electrical Engineering</div>
+            <div class="resume-org">Georgia Institute of Technology · Atlanta, GA</div>
+            <div class="resume-desc">Expected Graduation: May 2029</div>
+          </div>
+          <div class="resume-date">Aug 2025 – Present</div>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <div class="resume-section-title">Research Experience</div>
+        <div class="resume-item">
+          <div>
+            <div class="resume-role">Project ENGAGES Scholar and Undergraduate Research Student</div>
+            <div class="resume-org">Optical Imaging and Spectroscopy Lab · Georgia Tech</div>
+            <ul class="resume-bullets">
+              <li>Designed and fabricated custom PCBs for qOBM and multi-channel imaging systems</li>
+              <li>Developed a multi-channel handheld qOBM probe prototype using SolidWorks</li>
+              <li>Programmed PCBs with Arduino for LED control and MATLAB-based image acquisition</li>
+              <li>Expanded system capabilities with fluorescence imaging using multi-wavelength LED excitation</li>
+              <li>Developing a python-based app to implement parralel processing to enable asycnronous acquisition and saving in order to improve app efficiency</li>
+            </ul>
+          </div>
+          <div class="resume-date">Jun 2024 – Present</div>
+        </div>
+        <div class="resume-item">
+          <div>
+            <div class="resume-role">Undergraduate Research Assistant — IoT Lab</div>
+            <div class="resume-org">Aerospace System Design Laboratory (ASDL) · Georgia Tech</div>
+            <ul class="resume-bullets">
+              <li>Redesigned PCBs for a Hub and Spoke IoT sensor system (HUB, IAQ, and CT boards)</li>
+              <li>Transitioned lab's PCB workflow from KiCad to Autodesk Eagle; built custom component libraries</li>
+              <li>Re-routed boards with proper trace clearances and corrected inaccurate footprints</li>
+              <li>Validated PCB functionality through continuity testing and prototype soldering</li>
+              <li>Redesigning a new version of the RSET sensor with updated footprints for new added parts</li>
+            </ul>
+          </div>
+          <div class="resume-date">Jul 2025 – Present</div>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <div class="resume-section-title">Activities</div>
+        <div class="resume-item">
+          <div>
+            <div class="resume-role">Technical Mentor</div>
+            <div class="resume-org">FIRST Robotics Competition Team 6023</div>
+            <ul class="resume-bullets">
+              <li>Mentor high school students in system design, wiring, and robot troubleshooting</li>
+              <li>Guide students through hands-on problem solving and engineering best practices</li>
+            </ul>
+          </div>
+          <div class="resume-date">Dec 2025 – Present</div>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <div class="resume-section-title">Skills</div>
+        <div style="margin-bottom:1rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:0.63rem;color:rgba(168,200,232,0.3);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.1em;">Programming</div>
+          <div class="skills-grid">
+            <span class="skill-pill">Python</span><span class="skill-pill">C++</span><span class="skill-pill">MATLAB</span><span class="skill-pill">HTML</span>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:0.63rem;color:rgba(168,200,232,0.3);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.1em;">Hardware</div>
+          <div class="skills-grid">
+            <span class="skill-pill">Arduino</span><span class="skill-pill">ESP / Boron 404x</span><span class="skill-pill">Soldering</span><span class="skill-pill">Multimeter</span><span class="skill-pill">PCB Fabrication</span>
+          </div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:0.63rem;color:rgba(168,200,232,0.3);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.1em;">Software</div>
+          <div class="skills-grid">
+            <span class="skill-pill">Autodesk EAGLE</span><span class="skill-pill">KiCad</span><span class="skill-pill">SolidWorks</span><span class="skill-pill">MATLAB/Simulink</span><span class="skill-pill">ImageJ</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.63rem;color:rgba(168,200,232,0.3);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.1em;">Languages</div>
+          <div class="skills-grid">
+            <span class="skill-pill">Spanish (Native)</span><span class="skill-pill">English (Fluent)</span><span class="skill-pill">French (Beginner)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-download">
+        <a href="GarciaNuno_Jimena_Amazon.pdf" class="btn btn-primary" download>↓ Download Full Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- GOALS -->
+  <section id="goals">
+    <div class="section-label">03 — Career Goals</div>
+    <h2>Where I'm Headed</h2>
+    <p style="color:var(--muted); font-weight:300; max-width:600px; margin-bottom:0.5rem;">
+      My long-term aspiration is to lead hardware engineering projects in biomedical robotics/imaging or smart infrastructure — bridging precision hardware design with real-world impact. Here's my roadmap.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">NOW — Year 1 (2025–2026)</div>
+        <div class="timeline-content">
+          <h3>Build the Foundation</h3>
+          <p>Complete core ECE coursework, continue contributing to the Optical Imaging and ASDL IoT labs, and deepen skills in PCB design, embedded programming, and MATLAB. Stay active in my current clubs and also join GT's Medical Robotics Club and WECE while mentoring FRC Team 6023.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Year 2–3 (2026–2028)</div>
+        <div class="timeline-content">
+          <h3>Gain Industry Experience</h3>
+          <p>Secure an internship in hardware or software development for imaging, embedded systems, or IoT. Complete upper-division ECE coursework in circuits and signals. Expand research contributions and aim to present findings at a conference or symposium.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Year 4 — Graduation (May 2029)</div>
+        <div class="timeline-content">
+          <h3>Launch My Engineering Career</h3>
+          <p>Graduate with a B.S. in Electrical Engineering from Georgia Tech. By this point I aim to have completed at least one internship, two semesters of active research, and a senior capstone project. Apply for full-time roles in hardware engineering or biomedical devices.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">5+ Years Out</div>
+        <div class="timeline-content">
+          <h3>Long-Term Vision</h3>
+          <p>Lead a hardware team developing next-generation biomedical devices or smart infrastructure platforms that improve lives at scale. Potentially pursue a graduate degree in electrical or biomedical engineering to deepen technical expertise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">04 — Technical Projects</div>
+    <h2>My Work</h2>
+    <p style="color:var(--muted); font-weight:300; max-width:600px;">
+      A portfolio of projects I've built, researched, and contributed to. This section grows throughout my time at Georgia Tech.
+    </p>
+
+    <div class="projects-grid">
+
+      <!-- Discovery Project — full width -->
+      <div class="project-card" style="grid-column: 1 / -1;">
+        <div class="project-image" style="height:240px;">
+          <!-- Replace with: <img src="images/discovery-project.jpg" alt="Discovery Project"> -->
+          <div class="project-image-placeholder">
+            <div style="font-size:2.5rem;"><strong>ArduinoPod</strong></div>
+            <div>Add project image here</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">ECE 1100 Discovery Project</div>
+          <h3>Arduino mp3 player</h3>
+          <p><strong style="color:rgba(168,200,232,0.75);">Overview:</strong>Description of my arduino mp3 player</p>
+          <p><strong style="color:rgba(168,200,232,0.75);">Process & Methods:</strong> [tools and stuff i used to complete project]</p>
+          <p><strong style="color:rgba(168,200,232,0.75);">Results:</strong> [final work]</p>
+          <p><strong style="color:rgba(168,200,232,0.75);">What I Learned:</strong> [what i learned]</p>
+          <div class="project-tags">
+            <span class="project-tag">ECE 1100</span>
+            <span class="project-tag">Georgia Tech</span>
+            <span class="project-tag">Arduino</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- qOBM PCB Project -->
+      <div class="project-card">
+        <div class="project-image">
+          <div class="project-image-placeholder">
+            <div style="font-size:2rem;"><strong>OIS LAB</strong></div>
+            <div>Add project image</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">Research · OIS Lab</div>
+          <h3>Project ENGAGES</h3>
+          <p>Designed and fabricated custom printed circuit boards for a quantitative oblique back-illumination hand-held probe and prototyped a multi-channeled probe using SolidWorks, enabling advanced label-free biomedical imaging for cancer detection and tissue characterization.</p>
+          <h1>Final ENGAGES Presentation</h1>
+          <iframe src="pdfs/JimenaGarciaFinalPresentation2025.pdf"
+            width="100%" height="500px"
+            style="border:none; border-radius:8px; margin-top:1rem;">
+          </iframe>
+          <h1>Final ENGAGES Poster symposium</h1>
+          <iframe src="pdfs/winter2024postergarcianuno_48x36%20.pdf"
+            width="100%" height="500px"
+            style="border:none; border-radius:8px; margin-top:1rem;">
+          </iframe>
+          <h3>End of Semester Report for FALL 2025</h3>
+          <p>Worked on parallelizing the qOBM app for asycnronous acquisition and saving in order to reduce RAM usage making the app more effecient. I wasn't able to achieve wanted results but I am now working on developing a python-based app to reach true parallel acquisition and saving.</p>
+          <iframe src="pdfs/End%20of%20Semester%20Report%20Fall%202025-JimenaGarciaNuno%20(1).pdf"
+            width="100%" height="500px"
+            style="border:none; border-radius:8px; margin-top:1rem;">
+          </iframe>
+          <div class="project-tags">
+            <span class="project-tag">PCB Design</span>
+            <span class="project-tag">Autodesk Eagle</span>
+            <span class="project-tag">Arduino</span>
+            <span class="project-tag">MATLAB</span>
+            <span class="project-tag">SolidWorks</span>
+            <span class="project-tag">Python</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- IoT Project -->
+      <div class="project-card">
+        <div class="project-image">
+          <div class="project-image-placeholder">
+            <div style="font-size:2rem;"><strong>IoT</strong></div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">Research · ASDL IoT Lab</div>
+          <h3>IoT Sensor Platform Redesign</h3>
+          <p>Redesigned PCBs for a multi-node IoT environmental sensor platform at Georgia Tech's ASDL. Transitioned design workflow to Autodesk Eagle, built custom component libraries, and validated boards through soldering and continuity testing.</p>
+          <iframe src="pdfs/Fall2025_FinalPresentationJimenaGarciaNuno.pdf"
+            width="100%" height="500px"
+            style="border:none; border-radius:8px; margin-top:1rem;">
+          </iframe>
+          <div class="project-tags">
+            <span class="project-tag">Autodesk Eagle</span>
+            <span class="project-tag">PCB Design</span>
+            <span class="project-tag">IoT</span>
+            <span class="project-tag">Embedded Systems</span>
+            <span class="project-tag">Soldering</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-placeholder" style="grid-column: 1 / -1;">
+        <div style="font-size:2rem; margin-bottom:0.75rem; opacity:0.3;">＋</div>
+        <div style="font-family:'DM Mono',monospace; font-size:0.8rem;">More projects coming soon</div>
+        <div style="font-size:0.8rem; margin-top:0.4rem; opacity:0.7;">This section grows throughout my time at GT</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Jimena Garcia-Nuno</div>
+    <div class="footer-links">
+      <a href="mailto:jnuno3@gatech.edu">jnuno3@gatech.edu</a>
+      <a href="tel:4705732465">470-573-2465</a>
+      <a href="https://linkedin.com/in/jimena-garcia-nuno" target="_blank">LinkedIn</a>
+      <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+    </div>
+    <div>© 2025 Jimena Garcia-Nuno · Electrical Engineering · Georgia Institute of Technology</div>
+  </footer>
+
+  <script>
+    const allSections = document.querySelectorAll('section, #home');
+    const navLinks    = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = 'home';
+      allSections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 140) current = sec.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
