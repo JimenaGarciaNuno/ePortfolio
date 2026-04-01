@@ -273,7 +273,7 @@
     .section-divider { border: none; border-top: 2px solid #000; max-width: 1100px; margin: 0 3rem; }
 
     /* ── ABOUT ── */
-    .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.6fr 0.85fr; gap: 3rem; margin-top: 3rem; align-items: start; }
     .about-image-block { position: sticky; top: 7rem; }
 
     .about-photo {
@@ -286,6 +286,22 @@
       display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
       color: rgba(168,200,232,0.4);
       font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    }
+
+    .about-photos-right {
+      position: sticky; top: 7rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .about-photo-small {
+      width: 100%; aspect-ratio: 4/3;
+      background: #000; border-radius: 12px; overflow: hidden;
+    }
+    .about-photo-small img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .about-photo-small:hover img { transform: scale(1.04); }
+    .about-photo-small-placeholder {
+      width: 100%; height: 100%; min-height: 120px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem;
+      color: rgba(168,200,232,0.35); font-family: 'DM Mono', monospace; font-size: 0.65rem;
     }
 
     .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
@@ -368,7 +384,7 @@
     .timeline-content p { color: rgba(168,200,232,0.55); font-size: 0.88rem; font-weight: 300; margin-top: 0.4rem; }
 
     /* ── PROJECTS ── */
-    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .projects-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
 
     .project-card { background: #000; color: var(--text-inv); border-radius: 16px; overflow: hidden; transition: transform 0.2s; }
     .project-card:hover { transform: translateY(-5px); }
@@ -425,6 +441,7 @@
       .hero-inner { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; }
       .about-image-block { position: static; }
+      .about-photos-right { display: none; }
       .projects-grid { grid-template-columns: 1fr; }
       .section-divider { margin: 0 1.5rem; }
     }
@@ -439,7 +456,7 @@
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#resume">Resume</a></li>
-      <li><a href="#carreergoals"> Career Goals</a></li>
+      <li><a href="#goals"> Career Goals</a></li>
       <li><a href="#projects">Projects</a></li>
     </ul>
   </nav>
@@ -494,10 +511,6 @@
       <div class="about-image-block">
         <div class="about-photo">
           <img src="images/IMG_4567.jpeg" alt="Jimena">
-          //<div class="about-photo-placeholder">
-          //<div style="font-size:3rem;"div>
-          //  <div>Add your photo here</div>
-          //</div>
         </div>
         <div class="about-tags">
           <span class="tag filled">PCB Design</span>
@@ -528,6 +541,26 @@
           <strong>What makes me stand out:</strong> I bring hands-on hardware fluency — soldering, PCB fabrication, continuity testing, and embedded programming — paired with the communication skills needed to thrive in diverse, interdisciplinary teams.
         </p>
       </div>
+
+      <!-- 3 photos right column -->
+      <div class="about-photos-right">
+        <div class="about-photo-small">
+          <div class="about-photo-small-placeholder">
+            <img src="images/IMG_9689.jpeg" alt="mentoring student; teaching how to solder">
+          </div>
+        </div>
+        <div class="about-photo-small">
+          <div class="about-photo-small-placeholder">
+            <img src="images/IMG_2638.jpeg" alt="My senior year at FRC comp as Finalist">
+          </div>
+        </div>
+        <div class="about-photo-small">
+          <div class="about-photo-small-placeholder">
+            <img src="images/75a4224f845bfe95f8dc21dd371b34d7.JPG" alt="show casing my teams canbot to the mayor of Atlanta">
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -692,7 +725,7 @@
     <div class="projects-grid">
 
       <!-- Discovery Project — full width -->
-      <div class="project-card" style="grid-column: 1 / -1;">
+      <div class="project-card">
         <div class="project-image" style="height:240px;">
           <!-- Replace with: <img src="images/discovery-project.jpg" alt="Discovery Project"> -->
           <div class="project-image-placeholder">
@@ -714,7 +747,8 @@
           </div>
         </div>
       </div>
-      
+
+      <!-- qOBM PCB Project -->
       <div class="project-card">
         <div class="project-image">
           <div class="project-image-placeholder">
@@ -726,15 +760,15 @@
           <div class="project-type">Research · OIS Lab</div>
           <h3>Project ENGAGES</h3>
           <p>Designed and fabricated custom printed circuit boards for a quantitative oblique back-illumination hand-held probe and prototyped a multi-channeled probe using SolidWorks, enabling advanced label-free biomedical imaging for cancer detection and tissue characterization.</p>
-          <h1>Final ENGAGES Presentation</h1>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:1.3rem; color:var(--bg); letter-spacing:0.05em; margin-top:1.5rem;">Final ENGAGES Presentation</div>
           <iframe src="pdfs/JimenaGarciaFinalPresentation2025.pdf"
             width="100%" height="500px"
-            style="border:none; border-radius:8px; margin-top:1rem;">
+            style="border:none; border-radius:8px; margin-top:0.5rem;">
           </iframe>
-          <h1>Final ENGAGES Poster symposium</h1>
-          <iframe src="pdfs/winter2024postergarcianuno_48x36%20.pdf"
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:1.3rem; color:var(--bg); letter-spacing:0.05em; margin-top:1.5rem;">Final ENGAGES Poster Symposium</div>
+          <iframe src="pdfs/winter2024postergarcianuno_48x36.pdf"
             width="100%" height="500px"
-            style="border:none; border-radius:8px; margin-top:1rem;">
+            style="border:none; border-radius:8px; margin-top:0.5rem;">
           </iframe>
           <h3>End of Semester Report for FALL 2025</h3>
           <p>Worked on parallelizing the qOBM app for asycnronous acquisition and saving in order to reduce RAM usage making the app more effecient. I wasn't able to achieve wanted results but I am now working on developing a python-based app to reach true parallel acquisition and saving.</p>
@@ -778,7 +812,7 @@
         </div>
       </div>
 
-      <div class="project-placeholder" style="grid-column: 1 / -1;">
+      <div class="project-placeholder">
         <div style="font-size:2rem; margin-bottom:0.75rem; opacity:0.3;">＋</div>
         <div style="font-family:'DM Mono',monospace; font-size:0.8rem;">More projects coming soon</div>
         <div style="font-size:0.8rem; margin-top:0.4rem; opacity:0.7;">This section grows throughout my time at GT</div>
@@ -791,7 +825,7 @@
   <footer>
     <div class="footer-name">Jimena Garcia-Nuno</div>
     <div class="footer-links">
-      <a href="mailto:jnuno3@gatech.edu">jnuno3@gatech.edu</a>
+      <a href="/cdn-cgi/l/email-protection#f892968d9697cbb89f998c9d9b90d69d9c8d"><span class="__cf_email__" data-cfemail="6c06021902035f2c0b0d18090f0442090819">[email&#160;protected]</span></a>
       <a href="tel:4705732465">470-573-2465</a>
       <a href="https://linkedin.com/in/jimena-garcia-nuno" target="_blank">LinkedIn</a>
       <a href="https://github.com/yourusername" target="_blank">GitHub</a>
@@ -799,20 +833,10 @@
     <div>© 2025 Jimena Garcia-Nuno · Electrical Engineering · Georgia Institute of Technology</div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const allSections = document.querySelectorAll('section, #home');
     const navLinks    = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
       let current = 'home';
       allSections.forEach(sec => {
-        if (window.scrollY >= sec.offsetTop - 140) current = sec.getAttribute('id');
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
-      });
-    });
-  </script>
-
-</body>
-</html>
+        if (window.scrollY >= sec.offsetTop - 140) current = sec
